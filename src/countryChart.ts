@@ -23,7 +23,7 @@ export let countryModalChart = (country) => {
                 data: [country.active]
             }]
     };
-
+console.log(country.location)
     const config = {
         type: 'bar',
         data: data,
@@ -31,7 +31,7 @@ export let countryModalChart = (country) => {
     };
 
     // const myChart = new Chart(
-    //     document.getElementById('myChart'),
+    //     document.getElementById(`modal-body${country.replace(/[^0-9a-zA-Z]/g, '').location.split(" ").join("")}`),
     //     config
     // );
 }

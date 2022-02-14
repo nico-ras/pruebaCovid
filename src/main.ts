@@ -4,6 +4,7 @@ import { countryName, overTenThou, addRecoveredActive } from './filters.js';
 import { chartConstructor } from './chartBuild.js';
 import { countryData } from './dataCountry.js';
 import { countryModalChart } from './countryChart.js'
+import { idFormat } from './idFormat.js'
 
 let covData = async () => {
     let info = await dataTotal();
@@ -29,17 +30,17 @@ let covData = async () => {
 
     let ftaCountryData: Array<any> = firstTenActv.map((e) => [e.confirmed, e.deaths, e.recovered, e.active]) 
 
-    console.log(ftaCountryData)
+    //console.log(ftaCountryData)
 
-    console.log(info);
+    //console.log(info);
 
-    console.log(moreActive);
+    //console.log(moreActive);
 
-    console.log(firstTenActv)
+    //console.log(firstTenActv)
 
-    console.log(countryLabels)
+    //console.log(countryLabels)
 
-    console.log(ftaActive)
+    //console.log(ftaActive)
 
     
     chartConstructor(countryLabels, ftaConfirmed, ftaDeaths, ftaRecovered, ftaActive);
@@ -47,7 +48,7 @@ let covData = async () => {
     fillTable(moreActive, "tableBody");
 
     
-
+    buttonModal()
    
 
 
@@ -60,17 +61,96 @@ let specificData = async (url) => {
     let countryOnlyData = countryResponse.data
     let countryTotalInfo = addRecoveredActive(countryOnlyData)
 
-    console.log(countryTotalInfo)
+    //console.log(countryTotalInfo)
 
     countryModalChart(countryTotalInfo)
 }
 
-// let pressedButtons = document.querySelectorAll('.modalButton'); 
-// pressedButtons.addEventListener('click', )
 
-specificData('Brazil')
 
 covData()
+
+let buttonModal = async () => {
+
+ let pressedButtons = document.querySelectorAll('.modalButton'); 
+ 
+ pressedButtons.forEach(elem => {
+     elem.addEventListener('click', (event) => {
+      let objetiveCountry = elem.getAttribute("data-country")
+
+      let abbrCountry: string
+
+      
+  
+      switch (objetiveCountry) {
+          case 'UnitedKingdom':
+              abbrCountry = 'GB'
+              break;
+          case 'SouthAfrica':
+              abbrCountry = 'ZA'
+              break;
+          case 'UnitedArabEmirates':
+              abbrCountry = 'AE'
+              break;
+              case 'KoreaSouth':
+              abbrCountry = 'KR'
+              break;
+          case 'CostaRica':
+              abbrCountry = 'CR'
+              break;
+          case 'SaudiArabia':
+              abbrCountry = 'SA'
+              break;
+          case 'SriLanka':
+              abbrCountry = 'LK'
+              break;
+          case 'WestBankandGaza':
+              abbrCountry = 'PS'
+              break;
+          case 'DominicanRepublic':
+              abbrCountry = 'DO'
+              break;
+          case 'BosniaandHerzegovina':
+              abbrCountry = 'BA'
+              break;
+          case 'NorthMacedonia':
+              abbrCountry = 'MK'
+              break;
+          case 'ElSalvador':
+              abbrCountry = 'SV'
+              break;
+          case 'TrinidadandTobago':
+              abbrCountry = 'TT'
+              break;
+          case 'CongoKinshasa':
+              abbrCountry = 'CD'
+              break;
+          case "CotedIvoire":
+            abbrCountry = 'CI'
+            break;  
+          case 'CaboVerde':
+            abbrCountry = 'CV'
+            break;
+         case 'PapuaNewGuinea':
+             abbrCountry = 'PG'
+             break;
+         default:
+             abbrCountry = objetiveCountry
+             break;                                                     
+
+      }
+
+      console.log(abbrCountry);
+      specificData(abbrCountry)
+     })
+ });
+}
+
+
+
+
+
+
 
 
 

@@ -22,13 +22,14 @@ export let countryModalChart = (country) => {
                 data: [country.active]
             }]
     };
+    console.log(country.location);
     const config = {
         type: 'bar',
         data: data,
         options: {}
     };
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
+     const myChart = new Chart(
+         document.getElementById(`modal-body${country.location.replace(/[^0-9a-zA-Z]/g, '').split(" ").join("")}`),
+         config
+     );
 };
