@@ -4,7 +4,7 @@ import { countryName, overTenThou, addRecoveredActive } from './filters.js';
 import { chartConstructor } from './chartBuild.js';
 import { countryData } from './dataCountry.js';
 import { countryModalChart } from './countryChart.js'
-import { idFormat } from './idFormat.js'
+
 
 let covData = async () => {
     let info = await dataTotal();

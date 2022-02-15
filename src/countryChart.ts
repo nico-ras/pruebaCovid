@@ -31,7 +31,7 @@ console.log(country.location)
     };
 
     // const myChart = new Chart(
-    //     document.getElementById(`modal-body${country.replace(/[^0-9a-zA-Z]/g, '').location.split(" ").join("")}`),
+    //     document.getElementById(`modal-body${country.location.replace(/[^0-9a-zA-Z]/g, '').split(" ").join("")}`),
     //     config
     // );
 }
