@@ -1,3 +1,5 @@
+
+
 export const fillTable = (data: Array<any>, table: string) => {
     
    let wrapper = document.getElementById(table);
@@ -27,7 +29,6 @@ export const fillTable = (data: Array<any>, table: string) => {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -35,5 +36,7 @@ export const fillTable = (data: Array<any>, table: string) => {
 
                              </tr>`
    });
+
+ 
 
 }  

@@ -22,7 +22,6 @@ export let countryModalChart = (country) => {
                 data: [country.active]
             }]
     };
-    console.log(country.location);
     const config = {
         type: 'bar',
         data: data,

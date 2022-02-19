@@ -1,4 +1,4 @@
-export const getConfir = async (jwt) => {
+export const getConfir = async (jwt: string) => {
     try {
         const response = await fetch('http://localhost:3000/api/confirmed', {
 
@@ -7,15 +7,10 @@ export const getConfir = async (jwt) => {
             Authorization: `Bearer ${jwt}`
         }
         })
-
+        
         const {data} = await response.json();
         
-        //if (data) {
-            //fillFeed(data, "imgesDiv", counter);
-           // hide(form);
-            //show(divFeed);
-            
-        //}
+        
         return data
     } catch (err) {
         localStorage.clear()
@@ -23,7 +18,7 @@ export const getConfir = async (jwt) => {
     }
 }
 
-export const getDeaths = async (jwt) => {
+export const getDeaths = async (jwt: string) => {
     try {
         const response = await fetch('http://localhost:3000/api/deaths', {
 
@@ -34,13 +29,8 @@ export const getDeaths = async (jwt) => {
         })
 
         const {data} = await response.json();
+       
         
-        //if (data) {
-            //fillFeed(data, "imgesDiv", counter);
-           // hide(form);
-            //show(divFeed);
-            
-        //}
         return data
     } catch (err) {
         localStorage.clear()
@@ -48,7 +38,7 @@ export const getDeaths = async (jwt) => {
     }
 }
 
-export const getReco = async (jwt) => {
+export const getReco = async (jwt: string) => {
     try {
         const response = await fetch(' http://localhost:3000/api/recovered', {
 
@@ -60,12 +50,7 @@ export const getReco = async (jwt) => {
 
         const {data} = await response.json();
         
-        //if (data) {
-            //fillFeed(data, "imgesDiv", counter);
-           // hide(form);
-            //show(divFeed);
-            
-        //}
+        
         return data
     } catch (err) {
         localStorage.clear()

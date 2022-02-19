@@ -1,3 +1,4 @@
+import { hide } from "./showHide.js";
 export let chartConstructor = (labels, confirmeds, deaths, recovereds, actives) => {
     const data = {
         labels: labels,
@@ -29,4 +30,5 @@ export let chartConstructor = (labels, confirmeds, deaths, recovereds, actives) 
         options: {}
     };
     const myChart = new Chart(document.getElementById('myChart'), config);
+    hide(document.getElementById('loaderFt'));
 };

@@ -1,4 +1,5 @@
 
+
 export let countryModalChart = (country) => {
     const data = {
         labels: [`Pais: ${country.location}`],
@@ -23,7 +24,7 @@ export let countryModalChart = (country) => {
                 data: [country.active]
             }]
     };
-console.log(country.location)
+
     const config = {
         type: 'bar',
         data: data,
@@ -34,5 +35,7 @@ console.log(country.location)
          document.getElementById(`modal-body${country.location.replace(/[^0-9a-zA-Z]/g, '').split(" ").join("")}`),
          config
      );
+
+    
 }
 

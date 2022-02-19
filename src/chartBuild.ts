@@ -1,5 +1,6 @@
+import { hide } from "./showHide.js";
 
-export let chartConstructor = (labels: string, confirmeds: Array<any>, deaths: Array<any>, recovereds: Array<any>, actives: Array<any>) => {
+export let chartConstructor = (labels: Array<string>, confirmeds: Array<any>, deaths: Array<any>, recovereds: Array<any>, actives: Array<any>) => {
     const data = {
         labels: labels,
         datasets: [{
@@ -37,4 +38,6 @@ export let chartConstructor = (labels: string, confirmeds: Array<any>, deaths: A
          document.getElementById('myChart'),
          config
      );
+
+     hide(document.getElementById('loaderFt'));
 } 

@@ -30,5 +30,6 @@ export const logData = (email, password) => __awaiter(void 0, void 0, void 0, fu
     }
     catch (err) {
         console.error(`Error: ${err}`);
+        alert('Error en la autentificacion');
     }
 });

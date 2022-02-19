@@ -24,5 +24,6 @@ export const logData = async (email: string, password: string) => {
         return token;
     } catch (err) {
         console.error(`Error: ${err}`);
+        alert('Error en la autentificacion');
     }
 }

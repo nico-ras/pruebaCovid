@@ -5,12 +5,12 @@ import { chartConstructor } from './chartBuild.js';
 import { countryData } from './dataCountry.js';
 import { countryModalChart } from './countryChart.js'
 import { logData } from './loginChile.js'
-import { getConfir, getDeaths, getReco } from './getChileanData.js'
 import { init} from './logValidation.js'
 import { logout } from './logOut.js'
-import { chileanChartConstructor } from './chileanChart.js'
+import { CountriesData } from './objects.d.js'
 
-//init()
+
+init()
 
 let buttonlog = document.getElementById('loginButton') as HTMLButtonElement
 
@@ -18,111 +18,46 @@ buttonlog.addEventListener("click",( async (e) => {
     
     let email: string = ((document.getElementById('Form-email')) as HTMLInputElement).value
     let pass: string = ((document.getElementById('Form-pass')) as HTMLInputElement).value
-     
-    let modalForm = document.getElementById('modalLoginForm')as HTMLDivElement
     
+    if (email && pass) {
+        let JWT = await logData(email, pass)
+    } else {
+        alert("Debes ingresar todos los campos")
+    }
 
-    
-
-      let JWT = await logData(email, pass)
-      localStorage.setItem('nombre', 'lala')
-      let confirData = await getConfir(JWT)
-      let deathsData = await getDeaths(JWT)
-      let recoData = await getReco(JWT)
       
-
-      console.log(confirData)
-      console.log(deathsData)
-      console.log(recoData)
-      console.log(email)
-      
-    console.log(pass)
-
-    chileanChartConstructor(confirData, deathsData, recoData)
-
-
 }))
 
-//logout()
-
-
-
-//let dataChile = document.getElementById('clDataButton')
-//dataChile.addEventListener("click", () => {
-        //hide(document.getElementById('tableDivr'))
-        //hide(document.getElementById('chartDiv'))
-        
-//})
-
-//let homeButton = document.getElementById('homeBtn')
-//homeButton.addEventListener("click", () => {
-   // show(document.getElementById('tableDivr'))
-   // show(document.getElementById('chartDiv'))
-//})
-
-
-
+logout()
 
 let covData = async () => {
     let info = await dataTotal();
-
-
     info.map(addRecoveredActive);
 
     let userTestStatus: { id: number, name: string }[] = [ { "id": 0, "name": "Available" },
      { "id": 1, "name": "Ready" }, { "id": 2, "name": "Started" } ];
 
-    let moreActive = info.filter(overTenThou)
-
-    let firstTenActv = (info.sort((a, b) => (a.active > b.active) ? -1 : 1)).slice(0, 10)
-
-    let countryLabels = firstTenActv.map(countryName)
-
-    let ftaActive = firstTenActv.map((e) => e.active)
-
-    let ftaConfirmed = firstTenActv.map((e) => e.confirmed)
-
-    let ftaDeaths = firstTenActv.map((e) => e.deaths)
-
-    let ftaRecovered = firstTenActv.map((e) => e.recovered)
-
-
-
+    let moreActive: CountriesData = info.filter(overTenThou)
+    let firstTenActv: CountriesData = (info.sort((a, b) => (a.active > b.active) ? -1 : 1)).slice(0, 10)
+    let countryLabels: Array<string> = firstTenActv.map(countryName)
+    let ftaActive: Array<number> = firstTenActv.map((e) => e.active)
+    let ftaConfirmed: Array<number> = firstTenActv.map((e) => e.confirmed)
+    let ftaDeaths: Array<number> = firstTenActv.map((e) => e.deaths)
+    let ftaRecovered: Array<number> = firstTenActv.map((e) => e.recovered)
     let ftaCountryData: Array<any> = firstTenActv.map((e) => [e.confirmed, e.deaths, e.recovered, e.active]) 
-
-    //console.log(ftaCountryData)
-
-    //console.log(info);
-
-    //console.log(moreActive);
-
-    //console.log(firstTenActv)
-
-    //console.log(countryLabels)
-
-    //console.log(ftaActive)
-
     
     chartConstructor(countryLabels, ftaConfirmed, ftaDeaths, ftaRecovered, ftaActive);
-
+    
     fillTable(moreActive, "tableBody");
 
-    
     buttonModal()
-   
-
-
-
 
 }
 
-let specificData = async (url) => {
+let specificData = async (url: string) => {
     let countryResponse = await countryData(url)
     let countryOnlyData = countryResponse.data
     let countryTotalInfo = addRecoveredActive(countryOnlyData)
-
-    //console.log(countryTotalInfo)
-
     countryModalChart(countryTotalInfo)
 }
 
@@ -140,8 +75,6 @@ let buttonModal = async () => {
 
       let abbrCountry: string
 
-      
-  
       switch (objetiveCountry) {
           case 'UnitedKingdom':
               abbrCountry = 'GB'
@@ -197,10 +130,9 @@ let buttonModal = async () => {
          default:
              abbrCountry = objetiveCountry
              break;                                                     
-
       }
 
-      console.log(abbrCountry);
+      
       specificData(abbrCountry)
      })
  });

@@ -1,3 +1,2 @@
-type MyType = { id: number; name: string; }
+export type CountriesData = {location: string, confirmed: number, deaths: number, recovered: number, active: number} [];
 
-//: {location: string, active: string} []

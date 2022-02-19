@@ -16,11 +16,6 @@ export const getConfir = (jwt) => __awaiter(void 0, void 0, void 0, function* ()
             }
         });
         const { data } = yield response.json();
-        //if (data) {
-        //fillFeed(data, "imgesDiv", counter);
-        // hide(form);
-        //show(divFeed);
-        //}
         return data;
     }
     catch (err) {
@@ -37,11 +32,6 @@ export const getDeaths = (jwt) => __awaiter(void 0, void 0, void 0, function* ()
             }
         });
         const { data } = yield response.json();
-        //if (data) {
-        //fillFeed(data, "imgesDiv", counter);
-        // hide(form);
-        //show(divFeed);
-        //}
         return data;
     }
     catch (err) {
@@ -58,11 +48,6 @@ export const getReco = (jwt) => __awaiter(void 0, void 0, void 0, function* () {
             }
         });
         const { data } = yield response.json();
-        //if (data) {
-        //fillFeed(data, "imgesDiv", counter);
-        // hide(form);
-        //show(divFeed);
-        //}
         return data;
     }
     catch (err) {

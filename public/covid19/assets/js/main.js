@@ -14,37 +14,21 @@ import { chartConstructor } from './chartBuild.js';
 import { countryData } from './dataCountry.js';
 import { countryModalChart } from './countryChart.js';
 import { logData } from './loginChile.js';
-import { getConfir, getDeaths, getReco } from './getChileanData.js';
-import { chileanChartConstructor } from './chileanChart.js';
-//init()
+import { init } from './logValidation.js';
+import { logout } from './logOut.js';
+init();
 let buttonlog = document.getElementById('loginButton');
 buttonlog.addEventListener("click", ((e) => __awaiter(void 0, void 0, void 0, function* () {
     let email = (document.getElementById('Form-email')).value;
     let pass = (document.getElementById('Form-pass')).value;
-    let modalForm = document.getElementById('modalLoginForm');
-    let JWT = yield logData(email, pass);
-    localStorage.setItem('nombre', 'lala');
-    let confirData = yield getConfir(JWT);
-    let deathsData = yield getDeaths(JWT);
-    let recoData = yield getReco(JWT);
-    console.log(confirData);
-    console.log(deathsData);
-    console.log(recoData);
-    console.log(email);
-    console.log(pass);
-    chileanChartConstructor(confirData, deathsData, recoData);
+    if (email && pass) {
+        let JWT = yield logData(email, pass);
+    }
+    else {
+        alert("Debes ingresar todos los campos");
+    }
 })));
-//logout()
-//let dataChile = document.getElementById('clDataButton')
-//dataChile.addEventListener("click", () => {
-//hide(document.getElementById('tableDivr'))
-//hide(document.getElementById('chartDiv'))
-//})
-//let homeButton = document.getElementById('homeBtn')
-//homeButton.addEventListener("click", () => {
-// show(document.getElementById('tableDivr'))
-// show(document.getElementById('chartDiv'))
-//})
+logout();
 let covData = () => __awaiter(void 0, void 0, void 0, function* () {
     let info = yield dataTotal();
     info.map(addRecoveredActive);
@@ -58,12 +42,6 @@ let covData = () => __awaiter(void 0, void 0, void 0, function* () {
     let ftaDeaths = firstTenActv.map((e) => e.deaths);
     let ftaRecovered = firstTenActv.map((e) => e.recovered);
     let ftaCountryData = firstTenActv.map((e) => [e.confirmed, e.deaths, e.recovered, e.active]);
-    //console.log(ftaCountryData)
-    //console.log(info);
-    //console.log(moreActive);
-    //console.log(firstTenActv)
-    //console.log(countryLabels)
-    //console.log(ftaActive)
     chartConstructor(countryLabels, ftaConfirmed, ftaDeaths, ftaRecovered, ftaActive);
     fillTable(moreActive, "tableBody");
     buttonModal();
@@ -72,7 +50,6 @@ let specificData = (url) => __awaiter(void 0, void 0, void 0, function* () {
     let countryResponse = yield countryData(url);
     let countryOnlyData = countryResponse.data;
     let countryTotalInfo = addRecoveredActive(countryOnlyData);
-    //console.log(countryTotalInfo)
     countryModalChart(countryTotalInfo);
 });
 covData();
@@ -138,7 +115,6 @@ let buttonModal = () => __awaiter(void 0, void 0, void 0, function* () {
                     abbrCountry = objetiveCountry;
                     break;
             }
-            console.log(abbrCountry);
             specificData(abbrCountry);
         });
     });

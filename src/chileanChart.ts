@@ -1,3 +1,4 @@
+import { hide } from "./showHide.js";
 
 export let chileanChartConstructor = (confirData: Array<any>, deathsData: Array<any>, recoData: Array<any>) => {
     const data = {
@@ -18,12 +19,14 @@ export let chileanChartConstructor = (confirData: Array<any>, deathsData: Array<
         {
             label: "Recuperados",
             borderColor: "green",
-            data: recoData.map( (e) => e.total),
+            data: recoData.map( (e) => Math.round((confirData[recoData.indexOf(e)].total - deathsData[recoData.indexOf(e)].total) * 0.7) ),
             backgroundColor: 'transparent',
-        },
-        
+        }
+       
     ]
     };
+
+    
 
     const config = {
         type: 'line',
@@ -36,4 +39,8 @@ export let chileanChartConstructor = (confirData: Array<any>, deathsData: Array<
          document.getElementById('myChileanChart'),
          config
      );
+
+     
+        hide(document.getElementById('loaderCl'));
+     
 } 
