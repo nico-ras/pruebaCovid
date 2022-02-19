@@ -30,9 +30,9 @@ console.log(country.location)
         options: {}
     };
 
-    // const myChart = new Chart(
-    //     document.getElementById(`modal-body${country.location.replace(/[^0-9a-zA-Z]/g, '').split(" ").join("")}`),
-    //     config
-    // );
+     const myChart = new Chart(
+         document.getElementById(`modal-body${country.location.replace(/[^0-9a-zA-Z]/g, '').split(" ").join("")}`),
+         config
+     );
 }
 

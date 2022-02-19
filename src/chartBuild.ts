@@ -33,8 +33,8 @@ export let chartConstructor = (labels: string, confirmeds: Array<any>, deaths: A
     };
 
 
-    // const myChart = new Chart(
-    //     document.getElementById('myChart'),
-    //     config
-    // );
+     const myChart = new Chart(
+         document.getElementById('myChart'),
+         config
+     );
 } 

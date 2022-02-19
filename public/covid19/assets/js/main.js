@@ -13,9 +13,43 @@ import { countryName, overTenThou, addRecoveredActive } from './filters.js';
 import { chartConstructor } from './chartBuild.js';
 import { countryData } from './dataCountry.js';
 import { countryModalChart } from './countryChart.js';
+import { logData } from './loginChile.js';
+import { getConfir, getDeaths, getReco } from './getChileanData.js';
+import { chileanChartConstructor } from './chileanChart.js';
+//init()
+let buttonlog = document.getElementById('loginButton');
+buttonlog.addEventListener("click", ((e) => __awaiter(void 0, void 0, void 0, function* () {
+    let email = (document.getElementById('Form-email')).value;
+    let pass = (document.getElementById('Form-pass')).value;
+    let modalForm = document.getElementById('modalLoginForm');
+    let JWT = yield logData(email, pass);
+    localStorage.setItem('nombre', 'lala');
+    let confirData = yield getConfir(JWT);
+    let deathsData = yield getDeaths(JWT);
+    let recoData = yield getReco(JWT);
+    console.log(confirData);
+    console.log(deathsData);
+    console.log(recoData);
+    console.log(email);
+    console.log(pass);
+    chileanChartConstructor(confirData, deathsData, recoData);
+})));
+//logout()
+//let dataChile = document.getElementById('clDataButton')
+//dataChile.addEventListener("click", () => {
+//hide(document.getElementById('tableDivr'))
+//hide(document.getElementById('chartDiv'))
+//})
+//let homeButton = document.getElementById('homeBtn')
+//homeButton.addEventListener("click", () => {
+// show(document.getElementById('tableDivr'))
+// show(document.getElementById('chartDiv'))
+//})
 let covData = () => __awaiter(void 0, void 0, void 0, function* () {
     let info = yield dataTotal();
     info.map(addRecoveredActive);
+    let userTestStatus = [{ "id": 0, "name": "Available" },
+        { "id": 1, "name": "Ready" }, { "id": 2, "name": "Started" }];
     let moreActive = info.filter(overTenThou);
     let firstTenActv = (info.sort((a, b) => (a.active > b.active) ? -1 : 1)).slice(0, 10);
     let countryLabels = firstTenActv.map(countryName);

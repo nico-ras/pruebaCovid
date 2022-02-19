@@ -28,8 +28,5 @@ export let chartConstructor = (labels, confirmeds, deaths, recovereds, actives) 
         data: data,
         options: {}
     };
-     const myChart = new Chart(
-         document.getElementById('myChart'),
-         config
-     );
+    const myChart = new Chart(document.getElementById('myChart'), config);
 };
